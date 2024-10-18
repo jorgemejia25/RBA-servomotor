@@ -18,7 +18,7 @@ bool lastButtonState2 = LOW;
 bool lastButtonState4 = LOW;
 bool lastButtonState7 = LOW;
 
-int currentServoAngle = 60; // Para almacenar el ángulo actual del primer servo
+int currentServoAngle = 82; // Para almacenar el ángulo actual del primer servo
 
 void setup()
 {
@@ -35,7 +35,7 @@ void setup()
   digitalWrite(green, HIGH);  // Verde encendido cuando no hay movimiento
   digitalWrite(red, LOW);     // Rojo apagado inicialmente
 
-  moveServo1(60);
+  moveServo1(82);
   moveSecondServo();
 }
 
@@ -53,7 +53,7 @@ void loop()
   
   if ((millis() - lastDebounceTime2) > debounceDelay) {
     if (reading2 == HIGH) {   // Si el botón en pin 2 está presionado
-      moveServo1(60);         // Mover el primer servo a 60 grados
+      moveServo1(15);         // Mover el primer servo a 60 grados
       moveSecondServo();      // Mover el segundo servo
     }
   }
@@ -66,7 +66,7 @@ void loop()
   
   if ((millis() - lastDebounceTime4) > debounceDelay) {
     if (reading4 == HIGH) {   // Si el botón en pin 4 está presionado
-      moveServo1(120);        // Mover el primer servo a 120 grados
+      moveServo1(82);        // Mover el primer servo a 120 grados
       moveSecondServo();      // Mover el segundo servo
     }
   }
@@ -79,7 +79,7 @@ void loop()
   
   if ((millis() - lastDebounceTime7) > debounceDelay) {
     if (reading7 == HIGH) {   // Si el botón en pin 7 está presionado
-      moveServo1(180);        // Mover el primer servo a 180 grados
+      moveServo1(164);        // Mover el primer servo a 180 grados
       moveSecondServo();      // Mover el segundo servo
     }
   }
@@ -88,14 +88,14 @@ void loop()
 
 void moveServo1(int targetAngle) {
   int deltaAngle = abs(targetAngle - currentServoAngle); // Cambio de ángulo
-  int moveTime = deltaAngle * 17;  // Tiempo de movimiento (aprox 17 ms por grado)
+  int moveTime = deltaAngle * 15;  // Tiempo de movimiento (aprox 17 ms por grado)
   
   // Encender LED rojo y apagar LED verde mientras el servo se mueve
   digitalWrite(red, HIGH);
   digitalWrite(green, LOW);
   
   servo1.write(targetAngle);       // Mover el primer servo
-  delay(moveTime);                 // Esperar a que el primer servo termine de moverse
+  delay(153);                 // Esperar a que el primer servo termine de moverse
   
   // Apagar LED rojo y encender LED verde cuando termine el movimiento
   digitalWrite(red, LOW);
@@ -108,12 +108,11 @@ void moveSecondServo() {
   // Encender LED rojo y apagar LED verde mientras el segundo servo se mueve
   digitalWrite(red, HIGH);
   digitalWrite(green, LOW);
-  
   servo2.write(160);           // Mover el segundo servo a 200 grados
   delay(3000);                 // Esperar 3 segundos
   servo2.write(50);             // Volver a la posición inicial
   
   // Apagar LED rojo y encender LED verde cuando termine el movimiento
   digitalWrite(red, LOW);
-  digitalWrite(green, HIGH);
+  digitalWrite(green,HIGH);
 }
